@@ -22,18 +22,36 @@ class CourseRepositoryTest {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	CourseRepository respository;
+	CourseRepository repository;
 
 	@Test
-	public void findById() {
-		Course course = respository.findById(10001L);
+	public void findById_basic() {
+		Course course = repository.findById(10001L);
 		assertEquals("jpa", course.getName());
 	}
 
 	@Test
 	@DirtiesContext
-	public void deleteById() {
-		respository.deleteById(10002L);
-		assertNull(respository.findById(10002L));
+	public void deleteById_basic() {
+		repository.deleteById(10002L);
+		assertNull(repository.findById(10002L));
 	}
+
+	@Test
+	@DirtiesContext
+	public void save_basic() {
+//		get the course
+		Course course = repository.findById(10001L);
+		assertEquals("jpa", course.getName());
+
+//		update the course
+		course.setName("jpa - updated");		
+		repository.save(course);
+		
+//		check the value
+		Course course1 = repository.findById(10001L);
+		assertEquals("jpa - updated", course1.getName());
+		
+	}
+
 }
