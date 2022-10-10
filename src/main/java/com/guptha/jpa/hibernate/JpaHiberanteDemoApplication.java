@@ -27,6 +27,9 @@ public class JpaHiberanteDemoApplication implements CommandLineRunner {
 		// TODO Auto-generated method stub
 		Course course = repository.findById(10001L);
 		logger.info("Course 10001 -> {}", course);
+
+		repository.deleteById(10001L);
+
 	}
 
 }
