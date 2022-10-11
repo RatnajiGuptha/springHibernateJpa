@@ -45,13 +45,19 @@ class CourseRepositoryTest {
 		assertEquals("jpa", course.getName());
 
 //		update the course
-		course.setName("jpa - updated");		
+		course.setName("jpa - updated");
 		repository.save(course);
-		
+
 //		check the value
 		Course course1 = repository.findById(10001L);
 		assertEquals("jpa - updated", course1.getName());
-		
+
+	}
+
+	@Test
+	@DirtiesContext
+	public void playWithEntityManager() {
+		repository.playWithEntityManager();
 	}
 
 }
